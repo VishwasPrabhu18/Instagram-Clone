@@ -7,30 +7,26 @@ version: 1.0.0+1
 
 environment:
   sdk: '>=3.0.5 <4.0.0'
-  
+
 dependencies:
-  cupertino_icons: ^1.0.2
-
-  firebase_core: ^2.24.2
   cloud_firestore: ^4.13.6
+  cupertino_icons: ^1.0.2
   firebase_auth: ^4.15.3
+  firebase_core: ^2.24.2
   firebase_storage: ^11.5.6
-
-  flutter_dotenv: ^5.1.0
-
   flutter:
     sdk: flutter
+  flutter_svg: ^2.0.9
 
 dev_dependencies:
+
+  flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
-    
-  flutter_lints: ^2.0.0
-  
+
 flutter:
 
   uses-material-design: true
 
   assets:
-    - .env
-  
+    - assets/ic_instagram.svg
