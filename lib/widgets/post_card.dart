@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/utils/colors.dart';
 
@@ -12,6 +11,7 @@ class PostCard extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Column(
         children: [
+          // Header Section
           Container(
             padding: const EdgeInsets.symmetric(
               vertical: 4,
@@ -72,7 +72,16 @@ class PostCard extends StatelessWidget {
                 ),
               ],
             ),
-          )
+          ),
+          // Image Section
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.35,
+            width: double.infinity,
+            child: Image.network(
+              "https://plus.unsplash.com/premium_photo-1688125414593-391cf90f3103?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHx0b3BpYy1mZWVkfDl8TThqVmJMYlRSd3N8fGVufDB8fHx8fA%3D%3D",
+              fit: BoxFit.cover,
+            ),
+          ),
         ],
       ),
     );
