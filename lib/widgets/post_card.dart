@@ -19,15 +19,15 @@ class PostCard extends StatelessWidget {
             ).copyWith(right: 0),
             child: Row(
               children: [
-                CircleAvatar(
+                const CircleAvatar(
                   radius: 16,
                   backgroundImage: NetworkImage(
                     "https://images.unsplash.com/photo-1682686578456-69ae00b0ecbd?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHw0Mnx8fGVufDB8fHx8fA%3D%3D",
                   ),
                 ),
-                Expanded(
+                const Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.only(left: 8),
+                    padding: EdgeInsets.only(left: 8),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -117,7 +117,69 @@ class PostCard extends StatelessWidget {
                 ),
               ),
             ],
-          )
+          ),
+
+          // Description and no. of comments
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                DefaultTextStyle(
+                  style: Theme.of(context)
+                      .textTheme
+                      .subtitle2!
+                      .copyWith(fontWeight: FontWeight.w800),
+                  child: Text(
+                    "1,231 likes",
+                    style: Theme.of(context).textTheme.bodyText2,
+                  ),
+                ),
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.only(top: 8),
+                  child: RichText(
+                    text: const TextSpan(
+                      style: TextStyle(color: primaryColor),
+                      children: [
+                        TextSpan(
+                          text: "UserName",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        TextSpan(
+                          text: " Hey this is some description to be replaced",
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                InkWell(
+                  onTap: () {},
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(vertical: 4),
+                    child: const Text(
+                      "View All 200 comments",
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: secondaryColor,
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(vertical: 4),
+                  child: const Text(
+                    "18/12/2023",
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: secondaryColor,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );
