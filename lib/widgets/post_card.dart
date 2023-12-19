@@ -115,7 +115,9 @@ class _PostCardState extends State<PostCard> {
                     isAnimating: isLikeAnimating,
                     duration: const Duration(milliseconds: 400),
                     onEnd: () {
-                      isLikeAnimating = false;
+                      setState(() {
+                        isLikeAnimating = false;
+                      });
                     },
                     child: const Icon(
                       Icons.favorite,
