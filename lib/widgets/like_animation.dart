@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
 class LikeAnimation extends StatefulWidget {
@@ -31,7 +30,7 @@ class _LikeAnimationState extends State<LikeAnimation>
     super.initState();
     controller = AnimationController(
       vsync: this,
-      duration: Duration(microseconds: widget.duration.inMilliseconds ~/ 2),
+      duration: Duration(milliseconds: widget.duration.inMilliseconds ~/ 2),
     );
     scale = Tween<double>(begin: 1, end: 1.2).animate(controller);
   }
