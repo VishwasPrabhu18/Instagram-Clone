@@ -69,6 +69,7 @@ class _CommentsScreenState extends State<CommentsScreen> {
                     user.username,
                     user.photoUrl,
                   );
+                  _commentController.clear();
                 },
                 child: Container(
                   padding:
