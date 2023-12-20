@@ -14,7 +14,7 @@ class _CommentCardState extends State<CommentCard> {
       padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 16),
       child: Row(
         children: [
-          CircleAvatar(
+          const CircleAvatar(
             backgroundImage: NetworkImage(
               "https://images.unsplash.com/photo-1697168248031-7a8333f70930?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHx0b3BpYy1mZWVkfDUyfE04alZiTGJUUndzfHxlbnwwfHx8fHw%3D",
             ),
@@ -28,11 +28,11 @@ class _CommentCardState extends State<CommentCard> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   RichText(
-                    text: TextSpan(
+                    text: const TextSpan(
                       children: [
                         TextSpan(
                           text: "Username ",
-                          style: const TextStyle(fontWeight: FontWeight.bold),
+                          style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         TextSpan(
                           text: "Some description to insert",
@@ -40,8 +40,8 @@ class _CommentCardState extends State<CommentCard> {
                       ],
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 4),
+                  const Padding(
+                    padding: EdgeInsets.only(top: 4),
                     child: Text(
                       "19/12/2023",
                       style: TextStyle(
