@@ -1,21 +1,48 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/utils/colors.dart';
+import 'package:instagram_clone/utils/utils.dart';
 import 'package:instagram_clone/widgets/follow_button.dart';
 
 class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+  final String uid;
+  const ProfileScreen({
+    Key? key,
+    required this.uid,
+  }) : super(key: key);
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  var userData = {};
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+
+  getData() async {
+    try {
+      var snap = await FirebaseFirestore.instance
+          .collection("users")
+          .doc(widget.uid)
+          .get();
+      userData = snap.data()!;
+      setState(() {});
+    } catch (e) {
+      showSnackBar(e.toString(), context);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: mobileBackgroundColor,
-        title: Text("UserName"),
+        title: Text(userData["username"]),
         centerTitle: false,
       ),
       body: ListView(
@@ -29,7 +56,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     CircleAvatar(
                       backgroundColor: Colors.grey,
                       backgroundImage: NetworkImage(
-                        "https://images.unsplash.com/photo-1703165805602-54276ce0cd6b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw5fHx8ZW58MHx8fHx8",
+                        userData["profileUrl"],
                       ),
                       radius: 40,
                     ),

@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
 class FollowButton extends StatelessWidget {
@@ -30,6 +29,8 @@ class FollowButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(5),
           ),
           alignment: Alignment.center,
+          width: 250,
+          height: 27,
           child: Text(
             text,
             style: TextStyle(
@@ -37,8 +38,6 @@ class FollowButton extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          width: 250,
-          height: 27,
         ),
       ),
     );
