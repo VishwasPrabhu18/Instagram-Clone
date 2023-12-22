@@ -45,9 +45,7 @@ class _PostCardState extends State<PostCard> {
       showSnackBar(e.toString(), context);
     }
 
-    setState(() {
-      
-    });
+    setState(() {});
   }
 
   @override
@@ -99,7 +97,11 @@ class _PostCardState extends State<PostCard> {
                           ]
                               .map(
                                 (e) => InkWell(
-                                  onTap: () {},
+                                  onTap: () async {
+                                    await FireStoreMethods()
+                                        .deletePost(widget.snap["postId"]);
+                                    Navigator.of(context).pop();
+                                  },
                                   child: Container(
                                     padding: const EdgeInsets.symmetric(
                                       vertical: 12,
