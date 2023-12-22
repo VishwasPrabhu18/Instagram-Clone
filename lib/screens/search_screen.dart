@@ -11,6 +11,7 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   final TextEditingController _searchController = TextEditingController();
+  bool isShowUser = false;
 
   @override
   void dispose() {
@@ -29,11 +30,13 @@ class _SearchScreenState extends State<SearchScreen> {
             labelText: "Search for a user",
           ),
           onFieldSubmitted: (String _) {
-            print(_);
+            setState(() {
+              isShowUser = true;
+            });
           },
         ),
       ),
-      body: FutureBuilder(
+      body: isShowUser ? FutureBuilder(
         future: FirebaseFirestore.instance
             .collection("users")
             .where(
@@ -63,7 +66,7 @@ class _SearchScreenState extends State<SearchScreen> {
             },
           );
         },
-      ),
+      ) : const Text("Posts"),
     );
   }
 }
