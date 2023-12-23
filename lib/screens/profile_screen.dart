@@ -26,11 +26,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   getData() async {
     try {
-      var snap = await FirebaseFirestore.instance
-          .collection("users")
+      var userSnap = await FirebaseFirestore.instance
+          .collection('users')
           .doc(widget.uid)
           .get();
-      userData = snap.data()!;
+      userData = userSnap.data()!;
       setState(() {});
     } catch (e) {
       showSnackBar(e.toString(), context);
@@ -42,7 +42,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: mobileBackgroundColor,
-        title: Text(userData["username"]),
+        title: Text(
+          userData["username"],
+        ),
         centerTitle: false,
       ),
       body: ListView(
@@ -56,7 +58,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     CircleAvatar(
                       backgroundColor: Colors.grey,
                       backgroundImage: NetworkImage(
-                        userData["profileUrl"],
+                        userData["photoUrl"],
                       ),
                       radius: 40,
                     ),
@@ -96,8 +98,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     top: 15,
                   ),
                   child: Text(
-                    "UserName",
-                    style: TextStyle(
+                    userData["username"],
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -108,7 +110,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     top: 1,
                   ),
                   child: Text(
-                    "Some Description",
+                    userData["bio"],
                   ),
                 ),
               ],
