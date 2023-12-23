@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/utils/colors.dart';
 import 'package:instagram_clone/utils/utils.dart';
@@ -17,6 +18,7 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   var userData = {};
+  int postLen = 0;
 
   @override
   void initState() {
@@ -30,6 +32,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
           .collection("users")
           .doc(widget.uid)
           .get();
+
+      // get post length
+      var postSnap = await FirebaseFirestore.instance
+          .collection("posts")
+          .where("uid", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+          .get();
+
+      postLen = postSnap.docs.length;
       userData = snap.data()!;
       setState(() {});
     } catch (e) {
@@ -56,7 +66,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     CircleAvatar(
                       backgroundColor: Colors.grey,
                       backgroundImage: NetworkImage(
-                        userData["profileUrl"],
+                        userData["photoUrl"],
                       ),
                       radius: 40,
                     ),
@@ -68,7 +78,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              buildStatColumn(10, "Posts"),
+                              buildStatColumn(postLen, "Posts"),
                               buildStatColumn(200, "Followers"),
                               buildStatColumn(90, "Followings"),
                             ],
@@ -96,8 +106,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     top: 15,
                   ),
                   child: Text(
-                    "UserName",
-                    style: TextStyle(
+                    userData["username"],
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -108,7 +118,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     top: 1,
                   ),
                   child: Text(
-                    "Some Description",
+                    userData["bio"],
                   ),
                 ),
               ],
