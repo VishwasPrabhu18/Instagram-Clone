@@ -19,6 +19,8 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   var userData = {};
   int postLen = 0;
+  int followers = 0;
+  int following = 0;
 
   @override
   void initState() {
@@ -28,7 +30,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   getData() async {
     try {
-      var snap = await FirebaseFirestore.instance
+      var userSnap = await FirebaseFirestore.instance
           .collection("users")
           .doc(widget.uid)
           .get();
@@ -40,7 +42,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
           .get();
 
       postLen = postSnap.docs.length;
-      userData = snap.data()!;
+      followers = userSnap.data()!["followers"].length;
+      following = userSnap.data()!["following"].length;
+      userData = userSnap.data()!;
       setState(() {});
     } catch (e) {
       showSnackBar(e.toString(), context);
@@ -79,8 +83,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               buildStatColumn(postLen, "Posts"),
-                              buildStatColumn(200, "Followers"),
-                              buildStatColumn(90, "Followings"),
+                              buildStatColumn(followers, "Followers"),
+                              buildStatColumn(following, "Followings"),
                             ],
                           ),
                           Row(
