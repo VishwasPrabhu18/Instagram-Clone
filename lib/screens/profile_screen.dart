@@ -21,6 +21,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   int postLen = 0;
   int followers = 0;
   int following = 0;
+  bool isFollowing = false;
 
   @override
   void initState() {
@@ -44,6 +45,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
       postLen = postSnap.docs.length;
       followers = userSnap.data()!["followers"].length;
       following = userSnap.data()!["following"].length;
+      isFollowing = userSnap
+          .data()!["followers"]
+          .contains(FirebaseAuth.instance.currentUser!.uid);
       userData = userSnap.data()!;
       setState(() {});
     } catch (e) {
@@ -90,13 +94,30 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              FollowButton(
-                                text: "Edit Profile",
-                                backgroundColor: mobileBackgroundColor,
-                                textColor: primaryColor,
-                                borderColor: Colors.grey,
-                                function: () {},
-                              )
+                              FirebaseAuth.instance.currentUser!.uid ==
+                                      widget.uid
+                                  ? FollowButton(
+                                      text: "Edit Profile",
+                                      backgroundColor: mobileBackgroundColor,
+                                      textColor: primaryColor,
+                                      borderColor: Colors.grey,
+                                      function: () {},
+                                    )
+                                  : isFollowing
+                                      ? FollowButton(
+                                          text: "Unfollow",
+                                          backgroundColor: Colors.white,
+                                          textColor: Colors.black,
+                                          borderColor: Colors.grey,
+                                          function: () {},
+                                        )
+                                      : FollowButton(
+                                          text: "Follow",
+                                          backgroundColor: Colors.blue,
+                                          textColor: Colors.white,
+                                          borderColor: Colors.blue,
+                                          function: () {},
+                                        ),
                             ],
                           ),
                         ],
