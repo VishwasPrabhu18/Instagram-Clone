@@ -110,14 +110,17 @@ class FireStoreMethods {
 
       if (following.contains(followId)) {
         await _firestore.collection("users").doc(followId).update({
-          "following": FieldValue.arrayRemove([uid])
+          "followers": FieldValue.arrayRemove([uid])
         });
         await _firestore.collection("users").doc(uid).update({
-          "followers": FieldValue.arrayRemove([uid])
+          "following": FieldValue.arrayRemove([followId])
         });
       } else {
         await _firestore.collection("users").doc(followId).update({
           "followers": FieldValue.arrayUnion([uid])
+        });
+        await _firestore.collection("users").doc(uid).update({
+          "following": FieldValue.arrayUnion([followId])
         });
 
       }
