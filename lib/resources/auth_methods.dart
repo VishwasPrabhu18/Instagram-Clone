@@ -61,7 +61,7 @@ class AuthMethods {
             .doc(cred.user!.uid)
             .set(user.toJson());
 
-        res = "Success";
+        res = "success";
       } else {
         res = "Please enter all the fields";
       }
