@@ -32,11 +32,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   getData() async {
     try {
       var userSnap = await FirebaseFirestore.instance
-<<<<<<< HEAD
-          .collection('users')
-          .doc(widget.uid)
-          .get();
-=======
           .collection("users")
           .doc(widget.uid)
           .get();
@@ -53,7 +48,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
       isFollowing = userSnap
           .data()!["followers"]
           .contains(FirebaseAuth.instance.currentUser!.uid);
->>>>>>> origin/profile-screen
       userData = userSnap.data()!;
       setState(() {});
     } catch (e) {
