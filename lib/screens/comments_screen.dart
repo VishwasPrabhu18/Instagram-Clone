@@ -16,7 +16,6 @@ class CommentsScreen extends StatefulWidget {
 }
 
 class _CommentsScreenState extends State<CommentsScreen> {
-  @override
   final TextEditingController _commentController = TextEditingController();
 
   @override
@@ -25,6 +24,7 @@ class _CommentsScreenState extends State<CommentsScreen> {
     _commentController.dispose();
   }
 
+  @override
   Widget build(BuildContext context) {
     final User user = Provider.of<UserProvider>(context).getUser;
 
